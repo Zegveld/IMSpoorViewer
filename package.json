@@ -1,0 +1,11 @@
+{
+  "name": "IMSpoorViewer",
+  "version": "1.0.1-SNAPSHOT",
+  "description": "IMSpoorViewer",
+  "main": "index.html",
+  "scripts": {
+  },
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
