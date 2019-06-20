@@ -7,25 +7,26 @@ function handleFileSelect(evt) {
 
 	// files is a FileList of File objects. List some properties.
 	var output = [];
-	$.each(files, function (index, f) {
-		var reader = new FileReader();
-		reader.onload =
-			(function (file) {
-			var fileName = file.name;
-			console.log('file hallo: ' + fileName);
-			return function (event) {
-				var text = event.target.result;
-				var src = fileName;
-				var parser = new DOMParser();
-				var xmlDoc = parser.parseFromString(text, "text/xml");
-				parseAndRenderIMX(xmlDoc, src);
-			};
-		})(f);
-		reader.onerror = function (event) {
-			console.log('file-error: ' + event.target.error.code);
-		};
-		reader.readAsText(f);
-	});
+	handleFiles(files);
+//	$.each(files, function (index, f) {
+//		var reader = new FileReader();
+//		reader.onload =
+//			(function (file) {
+//			var fileName = file.name;
+//			console.log('file hallo: ' + fileName);
+//			return function (event) {
+//				var text = event.target.result;
+//				var src = fileName;
+//				var parser = new DOMParser();
+//				var xmlDoc = parser.parseFromString(text, "text/xml");
+//				parseAndRenderIMX(xmlDoc, src);
+//			};
+//		})(f);
+//		reader.onerror = function (event) {
+//			console.log('file-error: ' + event.target.error.code);
+//		};
+//		reader.readAsText(f);
+//	});
 }
 
 function handleDragOver(evt) {

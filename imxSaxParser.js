@@ -91,19 +91,22 @@ function configParser(parser) {
 		tagBuffer.push(tag);
 		if (tag.name === 'GEOGRAPHICLOCATION') {
 			var index = tagBuffer.length - 3;
-			tagBuffer = tagBuffer.slice(index);
+			//tagBuffer = tagBuffer.slice(index);
 			closingTagName = tagBuffer[0].name;
 			renderableObjects++;
 		}
-		if (tagBuffer.length > 1000) {
-			tagBuffer = [];
-		}
+//		if (tagBuffer.length > 1000) {
+//			tagBuffer = [];
+//		}
 	};
 	parser['ontext'] = function (text) {
 		tagBuffer.push(text);
 	};
 	parser['onclosetag'] = function (tag) {
-		tagBuffer.push(tag);
+		var lastOpen = tagBuffer.pop();
+		if (lastOpen !== tag){
+			console.log('ERROR: Geopend: '+lastOpen+'; Gesloten: '+tag);
+		}
 		if (tag === closingTagName) {
 			//buildGMLObject(tagBuffer);
 			buildGeoJsonFeature(tagBuffer);
